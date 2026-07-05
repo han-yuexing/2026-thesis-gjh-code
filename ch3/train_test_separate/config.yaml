@@ -1,0 +1,33 @@
+# Separate模型训练配置文件
+
+# 数据集配置
+dataset:
+  type: 'mixed'  # 混合数据集
+  img_dir: 'data/mixed'  # 相对于项目根目录
+  
+# 训练超参数
+training:
+  epochs: 100
+  batch_size: 20
+  lr: 0.00001
+  patience: 10  # 早停patience
+  n_runs: 10  # 运行次数（用于显著性检验）
+  
+# 随机种子（需要至少10个种子）
+seeds: [24, 42, 2024, 2025, 3407, 1234, 5678, 9999, 7777, 8888]
+
+# 模型配置
+model:
+  pretrained_path: 'model/pretrained/resnet18.pth'  # 相对于项目根目录
+
+# 数据预处理
+transform:
+  resize: [224, 224]
+  rotation_degrees: 15
+
+# 结果保存配置
+save:
+  results_dir: 'results'  # 相对于项目根目录
+  create_dated_folder: true
+  model_name: 'separate'
+

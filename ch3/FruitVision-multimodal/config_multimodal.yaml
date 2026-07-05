@@ -1,0 +1,32 @@
+# FruitVision多模态模型配置文件
+# 支持图片 + 重量 + 形状特征的多模态输入
+
+# 数据集配置
+dataset:
+  type: "banana"  # 'banana' 或 'cucumber'
+  # 黄瓜: 重量(weight) + 弯曲度(arch)
+  # 香蕉: 重量(weight) + 成熟度(ripeness)
+
+# 训练配置
+training:
+  epochs: 100
+  batch_size: 16
+  lr: 0.001
+  optimizer: "Adam"
+  n_runs: 10  # 多次运行用于统计分析
+
+# 模型配置
+model:
+  type: "simple"  # 'full' 使用完整版(带编码器), 'simple' 使用简化版(直接拼接)
+  num_classes: 4  # super, first, second, third
+  pretrained: true  # 使用预训练的MobileNetV3权重
+  freeze_backbone: false  # 冻结骨干网络
+
+# 随机种子 (用于可重复性实验)
+seeds: [24, 42, 2024, 2025, 3407, 1234, 5678, 9999, 7777, 8888]
+
+# 保存配置
+save:
+  model_name: "FruitVision-Multi"
+  save_best_only: true
+

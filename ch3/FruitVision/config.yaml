@@ -1,0 +1,38 @@
+# FruitVision模型训练配置文件
+
+# 数据集配置
+dataset:
+  type: 'cucumber'  # 可选: 'banana' 或 'cucumber'
+  
+# 训练超参数
+training:
+  epochs: 100
+  batch_size: 16
+  lr: 0.001
+  freeze_backbone: false  # 是否冻结主干网络
+  n_runs: 10  # 运行次数（用于显著性检验）
+  
+# 随机种子（需要至少10个种子）
+seeds: [24, 42, 2024, 2025, 3407, 1234, 5678, 9999, 7777, 8888]
+
+# 模型配置
+model:
+  dropout: 0.5
+  pretrained: true
+
+# 数据预处理
+transform:
+  target_size: [224, 224]
+  clahe:
+    clip_limit: 2.0
+    tile_grid_size: [8, 8]
+  normalize:
+    mean: [0.485, 0.456, 0.406]
+    std: [0.229, 0.224, 0.225]
+
+# 结果保存配置
+save:
+  results_dir: 'results'  # 相对于项目根目录
+  create_dated_folder: true
+  model_name: 'FruitVision'
+
